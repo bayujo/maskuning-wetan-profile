@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Web Profil Desa Maskuning Wetan, Kec. Pujer, Kab. Bondowoso, Indonesia">
+    <meta name="author" content="Johar">
+
+    <title>Desa Maskuning Wetan</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico') }}"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/f6cf9a2499.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='agency.min.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Desa Maskuning Wetan</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#sdgs">SDGS</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Statistik</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#portfolio">Profil</a>
+            </li>            
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#services">Lembaga Desa</a>
+            </li>                                    
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Galeri</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Selamat Datang di</div>
+          <div class="intro-heading text-uppercase">Desa Maskuning Wetan</div>
+          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#portfolio">Selengkapnya</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-light" id="sdgs">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase">Sustainable Development Goals</h2>
+              <h3 class="section-subheading text-muted">SDGs desa adalah upaya terpadu untuk pembangunan ekonomi, sosial, lingkungan, hukum dan tata kelola masyarakat di tingkat Desa</h3>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+                {% for goal in sgds_response['data'] %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="{{ goal['image'] }}" class="card-img-top" alt="{{ goal['title'] }}" style="max-width: 120px; max-height: 120px;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title" style="font-size: 14px;">{{ goal['score'] }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+      </section>
+    <!-- Sejarah Desa Maskuning Wetan -->
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Statistik</h2>
+            <h3 class="section-subheading text-muted">Desa Maskuning Wetan, Kec. Pujer, Kab. Bondowoso</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-md-12">
+                <canvas id="pyramidChart" style="width: 100%;"></canvas>
+              </div>
+              <div class="col-md-8">
+                <canvas id="genderComparisonChart"></canvas>
+              </div>
+              <div class="col-md-4">
+                <canvas id="maritalStatusChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Profil Desa Maskuning Wetan -->
+    <section class="bg-light" id="portfolio">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Profil</h2>
+            <h3 class="section-subheading text-muted">Desa Maskuning Wetan, Kec. Pujer, Kab. Bondowoso</h3>
+          </div>
+        </div>
+
+        <style>
+          .portfolio-item {
+            position: relative;
+          }
+        
+          .portfolio-item img {
+            
+            height: 10rem;
+            display: block;
+            margin: 0 auto;
+          }
+        
+          .portfolio-caption {
+            text-align: center;
+          }
+        </style>
+        
+        <div class="row">
+          <div class="col-md-4 col-sm-6 portfolio-item">
+            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+              <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                  <i class="fa fa-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{ url_for('static', filename='img/profil/wilayah.png') }}" alt="">
+            </a>
+            <div class="portfolio-caption bg-transparent">
+              <h4>Wilayah</h4>
+              <p class="text-muted">Desa Maskuning Wetan</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 portfolio-item">
+            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+              <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                  <i class="fa fa-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{ url_for('static', filename='img/profil/potensi.png') }}" alt="">
+            </a>
+            <div class="portfolio-caption bg-transparent">
+              <h4>Potensi</h4>
+              <p class="text-muted">Desa Maskuning Wetan</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 portfolio-item">
+            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+              <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                  <i class="fa fa-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{ url_for('static', filename='img/profil/visi-misi.png') }}" alt="">
+            </a>
+            <div class="portfolio-caption bg-transparent">
+              <h4>Visi dan Misi</h4>
+              <p class="text-muted">Desa Maskuning Wetan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lembaga Desa -->
+    <section id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            <h2 class="section-heading text-uppercase">Lembaga Desa</h2>            
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div class="timeline-image">
+              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='img/lembaga-desa/tp-pkk.png') }}" alt="">
+            </div>
+            <h4 class="service-heading">TP. PKK Desa</h4>
+            <p class="text-muted">Lembaga kemasyarakatan sebagai mitra kerja pemerintah dan organisasi kemasyarakatan lainnya, yang berfungsi sebagai fasilitator, perencana, pelaksana, pengendali dan penggerak pada masing-masing jenjang pemerintahan untuk terlaksananya program PKK.</p>
+          </div>
+          <div class="col-md-4">
+            <div class="timeline-image">
+              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='img/lembaga-desa/karang-taruna.png') }}" alt="">
+            </div>
+            <h4 class="service-heading">Karang Taruna</h4>
+            <p class="text-muted">Karang Taruna merupakan wadah pengembangan generasi muda nonpartisan, yang tumbuh atas dasar kesadaran dan rasa tanggung jawab sosial dari, oleh dan untuk masyarakat khususnya generasi muda di wilayah Desa yang bergerak dibidang kesejahteraan sosial.</p>
+          </div>
+          <div class="col-md-4">
+            <div class="timeline-image">
+              <img class="rounded-circle img-fluid" src="{{ url_for('static', filename='img/lembaga-desa/polindes.jpg') }}" alt="">
+            </div>
+            <h4 class="service-heading">Polindes</h4>
+            <p class="text-muted">Polindes, atau akronim dari pondok bersalin desa, adalah salah satu bentuk partisipasi atau peran serta masyarakat dalam menyediakan tempat pertolongan persalinan dan pelayanan kesehatan ibu dan anak, termasuk KB yang mana tempat dan lokasinya berada di desa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <style>
+      .image-container {
+        position: relative;
+        overflow: hidden;
+      }
+  
+      .image-container img {
+        transition: transform 0.3s, filter 0.3s;
+      }
+  
+      .image-container:hover img {
+        transform: scale(1.05);
+        filter: brightness(50%);
+      }
+  
+      .location-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+  
+      .image-container:hover .location-icon {
+        opacity: 1;
+      }
+    </style>
+    <!-- Kontak -->
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Galeri</h2>
+            <h3 class="section-subheading text-muted">Sorotan Desa Maskuning Wetan:</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="container mt-5">
+              <div class="row text-white">
+                <div class="col-md-4 mb-4">
+                  <div class="image-container">
+                    <a href="https://goo.gl/maps/PXooUZzBMQuyGQNv6" target="_blank">
+                      <img src="{{ url_for('static', filename='img/galeri/baldes.jpg') }}" alt="Image 1" style="max-width: 100%;">
+                      <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    </a>
+                    <p style="text-align: center;" class="mt-3">Balai Desa</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4" style="display: flex; flex-direction: column; align-items: center;">
+                  <div class="image-container">
+                    <a href="https://goo.gl/maps/XgnxUdZYLzMC4kjUA" target="_blank">
+                      <img src="{{ url_for('static', filename='img/galeri/polindes.jpg') }}" alt="Image 2" style="max-width: 100%;">
+                      <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    </a>
+                    <p style="text-align: center;" class="mt-3">Polindes</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4" style="display: flex; flex-direction: column; align-items: center;">
+                  <div class="image-container">
+                    <a href="https://goo.gl/maps/GTH6KgQzJzYCcksm8" target="_blank">
+                      <img src="{{ url_for('static', filename='img/galeri/sd1.jpg') }}" alt="Image 3" style="max-width: 100%;">
+                      <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    </a>
+                    <p style="text-align: center;" class="mt-3">SDN Maskuning Wetan 1</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4" style="display: flex; flex-direction: column; align-items: center;">
+                  <div class="image-container">
+                    <a href="https://goo.gl/maps/g5afA8RuzFyiXkaC9" target="_blank">
+                      <img src="{{ url_for('static', filename='img/galeri/sd2.jpg') }}" alt="Image 4" style="max-width: 100%;">
+                      <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    </a>
+                    <p style="text-align: center;" class="mt-3">SDN Maskuning Wetan 2</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4" style="display: flex; flex-direction: column; align-items: center;">
+                  <div class="image-container">
+                    <a href="https://goo.gl/maps/ACUpjUaor4BgCWTQ7" target="_blank">
+                      <img src="{{ url_for('static', filename='img/galeri/sd3.jpg') }}" alt="Image 5" style="max-width: 100%;">
+                      <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    </a>
+                    <p style="text-align: center;" class="mt-3">SDN Maskuning Wetan 3</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+             
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="copyright">Copyright 2023 &copy; All Rights Reserved</span>
+          </div>          
+          <div class="col-md-4">            
+          </div>
+          <div class="col-md-4">
+            <ul class="list-inline quicklinks">
+              <li class="list-inline-item">
+                <p>KKN UMD UNEJ 2022/2023</p>
+              </li>              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Portfolio Modals -->
+
+    <!-- Modal 1 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Wilayah</h2>
+                  <p class="item-intro text-muted">Desa Maskuning Wetan</p>
+                  <img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/profil/wilayah-full.png') }}" alt="">
+                  <p>Desa Maskuning Wetan merupakan salah satu desa yang ada di Kecamatan Pujer Kabupaten Bondowoso dengan luas wilayah 750 ha. Sebelah utara berbatasan dengan Desa Patemon, sebelah selatan berbatasan dengan Desa Sukowono, sebelah barat berbatasan dengan Desa Maskuning Kulon, dan sebelah timur berbatasan dengan Desa Tlogosari.</p>
+                  <!--
+                  <ul class="list-inline">
+                    <li>Date: January 2017</li>
+                    <li>Client: Threads</li>
+                    <li>Category: Illustration</li>
+                  </ul>
+                  -->
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">
+                    <i class="fa fa-times"></i>
+                    Tutup</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Potensi</h2>
+                  <p class="item-intro text-muted">Desa Maskuning Wetan</p>
+                  <img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/profil/potensi-full.png') }}" alt="">
+                  <p>Potensi yang dimilliki oleh Desa Maskuning Wetan adalah dalam bidang pertanian. Pertanian dan perkebunan yang ada Desa Maskuning Wetan sesuai dengan lahan di sini yang terbilang cukup baik. Beberapa komoditas yang ditanam adalah tembakau dan padi. Semua komoditas tersebut dipilih dengan bibit yang unggul.</p>
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">
+                    <i class="fa fa-times"></i>
+                    Tutup</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Visi dan Misi</h2>
+                  <p class="item-intro text-muted">Desa Maskuning Wetan</p>
+                  <img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/profil/visi-misi-full.png') }}" alt="">
+                  <p class="text-left"><b>VISI :</b>
+                    <br/>Visi Desa Maskuning Wetan adalah "MEWUJUDKAN MASYARAKAT SEJAHTERA YANG RELIGIUS DAN INTELEKTUAL MELALUI PENINGKATAN USAHA PERTANIAN"
+                    <br/><br/><b>MISI :</b>
+                    <br/>Untuk terwujudnya visi tersebut ditetapkan dua upaya/cara atau misi yang akan mendukung pencapaian visi yaitu:
+                    <br/>&emsp;1.&ensp;Mewujudkan perekonomian masyarakat yang tangguh dan berdaya saing berbasis potensi lokal
+                    <br/>&emsp;2.&ensp;Meningkatkan ketersediaan dan kualitas infrastruktur dan sarana umum
+                    <br/>&emsp;3.&ensp;Meningkatkan kualitas sumber daya manusia yang amanah dan berakhlak mulia
+                    <br/>&emsp;4.&ensp;Memfasilitasi peningakatan sarana dan prasarana serta kesadaran pendidikan
+                    <br/>&emsp;5.&ensp;Memfasilitasi pengembangan dan peningkatan hasil pertanian
+                    <br/>&emsp;6.&ensp;Meningkatkan kualitas penyelenggaraan pemerintahan Desa
+                  </p>
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">
+                    <i class="fa fa-times"></i>
+                    Tutup</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="{{ url_for('static', filename='js/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/contact_me.js') }}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{{ url_for('static', filename='js/agency.min.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var populationResponse = {{ population_response | tojson | safe }};
+    
+        var ageLabels = ["0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75+"];
+        var maleData = [populationResponse.l_0_4, populationResponse.l_5_9, populationResponse.l_10_14, populationResponse.l_15_19, populationResponse.l_20_24, populationResponse.l_25_29, populationResponse.l_30_34, populationResponse.l_35_39, populationResponse.l_40_44, populationResponse.l_45_49, populationResponse.l_50_54, populationResponse.l_55_59, populationResponse.l_60_64, populationResponse.l_65_69, populationResponse.l_70_74, populationResponse.l_75_plus];
+        var femaleData = [populationResponse.p_0_4, populationResponse.p_5_9, populationResponse.p_10_14, populationResponse.p_15_19, populationResponse.p_20_24, populationResponse.p_25_29, populationResponse.p_30_34, populationResponse.p_35_39, populationResponse.p_40_44, populationResponse.p_45_49, populationResponse.p_50_54, populationResponse.p_55_59, populationResponse.p_60_64, populationResponse.p_65_69, populationResponse.p_70_74, populationResponse.p_75_plus];
+    
+        var pyramidChart = new Chart(document.getElementById('pyramidChart'), {
+          type: 'bar',
+          data: {
+            labels: ageLabels,
+            datasets: [
+              {
+                label: 'Laki-laki',
+                backgroundColor: 'rgba(54, 162, 235, 0.7)', // Blue color
+                data: maleData,
+              },
+              {
+                label: 'Perempuan',
+                backgroundColor: 'rgba(255, 99, 132, 0.7)', // Red color
+                data: femaleData.map(function(value) {
+                  return -value; // Reverse the data for pyramid effect
+                }),
+              },
+            ],
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'Vertical Pyramid Chart - Age Distribution',
+            },
+            tooltips: {
+              intersect: false,
+              callbacks: {
+                label: function(context) {
+                  var datasetLabel = context.dataset.label || '';
+                  var value = context.parsed.y;
+                  var positiveValue = Math.abs(value);
+                  return datasetLabel + ': ' + positiveValue;
+                },
+              },
+            },
+            responsive: true,
+            legend: {
+              position: 'bottom',
+            },
+            scales: {
+              x: {
+                stacked: true,
+              },
+              y: {
+                stacked: false,
+                ticks: {
+                  beginAtZero: true,
+                  callback: function(value, index, values) {
+                    return Math.abs(value);
+                  },
+                },
+              },
+            },
+          },
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var populationResponse = {{ population_response | tojson | safe }};
+    
+        var genderComparisonChart = new Chart(document.getElementById('genderComparisonChart'), {
+          type: 'bar',
+          data: {
+            labels: ['Total Laki-laki', 'Total Perempuan'],
+            datasets: [
+              {
+                backgroundColor: ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)'],
+                data: [populationResponse.gender_men, populationResponse.gender_women],
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                display: false, // Hide legend
+              },
+            },
+            title: {
+              display: true,
+              text: 'Gender Comparison - Total Men vs Total Women',
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 50, // Adjust as needed
+                },
+              },
+            },
+          },
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var populationResponse = {{ population_response | tojson | safe }};
+    
+        var maritalStatusChart = new Chart(document.getElementById('maritalStatusChart'), {
+          type: 'pie',
+          data: {
+            labels: ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'],
+            datasets: [
+              {
+                backgroundColor: ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(255, 205, 86, 0.7)'],
+                data: [populationResponse.belum_kawin, populationResponse.kawin, populationResponse.cerai_hidup, populationResponse.cerai_mati],
+              },
+            ],
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'Marital Status Distribution',
+            },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
